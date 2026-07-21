@@ -1,16 +1,20 @@
-import Barplot from "./visualizations/01_FirstBarchart/Barplot.jsx";
+import { Routes, Route } from "react-router-dom";
+import Navigation from "./components/Navigation";
 
-import { barplotData } from "./visualizations/01_FirstBarchart/barplotData.js";
+import Home from "./pages/Home";
+import BarplotPage from "./pages/BarplotPage";
 
 export default function App() {
   return (
-    <div>
+    <>
       <h1>D3 ❤️ React: Course Gallery by Eva Maleckova</h1>
 
-      <section>
-        <h2>My First Barplot</h2>
-        <Barplot data={barplotData} />
-      </section>
-    </div>
+      <Navigation />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/barplot" element={<BarplotPage />} />
+      </Routes>
+    </>
   );
 }

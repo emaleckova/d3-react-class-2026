@@ -1,4 +1,4 @@
-export const barplotData = [
+const barplotData = [
   { country: "United States", students: 68 },
   { country: "France", students: 21 },
   { country: "United Kingdom", students: 21 },
@@ -20,3 +20,5 @@ export const barplotData = [
   { country: "Philippines", students: 3 },
   { country: "New Zealand", students: 3 },
 ];
+
+export default barplotData;
