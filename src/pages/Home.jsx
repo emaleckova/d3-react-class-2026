@@ -33,8 +33,26 @@ console.log(data);
 const width = 650;
 const height = 360;
 
+const margins = {
+  top: 50,
+  right: 5,
+  bottom: 5,
+  left: 50,
+};
+
+const innerWidth = width - margins.left - margins.right;
+const innerHeight = height - margins.top - margins.bottom;
+
 /*Scales*/
-const xScale = d3.scaleLinear().domain([0, 55]).range([0, width]);
+const xScale = d3.scaleLinear().domain([0, 55]).range([0, innerWidth]);
+const pathogens = data.map((d) => d.name).reverse();
+console.log("Pathogens: " + pathogens);
+const yScale = d3
+  .scaleBand()
+  .domain(pathogens)
+  .range([0, innerHeight])
+  .paddingInner(0.2)
+  .paddingOuter(0.2);
 
 /*Sequence for horizontal lines*/
 const range = (start, end, step = 5) =>
@@ -52,22 +70,61 @@ export default function Home() {
     <div>
       <h4>Prototype Area</h4>
 
-      <svg width={width} height={height}>
-        {/*background*/}
-        <rect width={width} height={height} fill="#f8f8f8" rx={4} />
-        {/*axis lines*/}
-        {xBreaks.map((d) => (
-          <line
-            x1={xScale(d)}
-            y1={0}
-            x2={xScale(d)}
-            y2={height}
-            stroke="#808080"
-            opacity={0.2}
-            shapeRendering="crispEdges"
-          />
-        ))}
-        <rect x={250} y={250} height={50} width={50} fill="#808080" />
+      <svg width={width} height={height} overflow="visible">
+        <text x={width / 2} y={25} textAnchor="middle">
+          My Title
+        </text>
+
+        {/*plotting area*/}
+        <g transform={`translate(${margins.left},${margins.top})`}>
+          {/*background*/}
+          <rect width={width} height={height} fill="#f8f8f8" rx={4} />
+          {/*axis lines*/}
+          {xBreaks.map((d, i) => (
+            <g key={i}>
+              <line
+                x1={xScale(d)}
+                y1={0}
+                x2={xScale(d)}
+                y2={height}
+                stroke="#808080"
+                opacity={0.2}
+                shapeRendering="crispEdges"
+              />
+              <text
+                x={xScale(d)}
+                y={-25}
+                textAnchor="middle"
+                alignmentBaseline="central"
+                fill="#808080"
+                fontSize={12}
+              >
+                {d}
+              </text>
+              {/*y-axis line*/}
+              <line
+                x1={xScale(0)}
+                y1={0}
+                x2={xScale(0)}
+                y2={height}
+                stroke="black"
+                opacity={0.8}
+                shapeRendering="crispEdges"
+              />
+            </g>
+          ))}
+          {/*Data*/}
+          {data.map((d, i) => (
+            <rect
+              key={i}
+              x={0}
+              y={yScale(d.name)}
+              height={yScale.bandwidth()}
+              width={xScale(d.count)}
+              fill="#076fa2"
+            />
+          ))}
+        </g>
       </svg>
     </div>
   );
