@@ -30,8 +30,8 @@ console.log(data);
 
 /*Image area*/
 
-const width = 700;
-const height = 700;
+const width = 650;
+const height = 360;
 
 /*Scales*/
 const xScale = d3.scaleLinear().domain([0, 55]).range([0, width]);
@@ -62,10 +62,12 @@ export default function Home() {
             y1={0}
             x2={xScale(d)}
             y2={height}
-            stroke="#504f53"
+            stroke="#808080"
+            opacity={0.2}
+            shapeRendering="crispEdges"
           />
         ))}
-        <rect x={250} y={250} height={50} width={50} fill="red" />
+        <rect x={250} y={250} height={50} width={50} fill="#808080" />
       </svg>
     </div>
   );
