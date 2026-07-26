@@ -34,10 +34,10 @@ const width = 650;
 const height = 360;
 
 const margins = {
-  top: 50,
-  right: 5,
-  bottom: 5,
-  left: 50,
+  top: 0,
+  right: 0,
+  bottom: 0,
+  left: 0,
 };
 
 const innerWidth = width - margins.left - margins.right;
@@ -71,14 +71,13 @@ export default function Home() {
       <h4>Prototype Area</h4>
 
       <svg width={width} height={height} overflow="visible">
-        <text x={width / 2} y={25} textAnchor="middle">
-          My Title
-        </text>
-
         {/*plotting area*/}
-        <g transform={`translate(${margins.left},${margins.top})`}>
+        <g transform={`translate(${margins.top},${margins.right})`}>
           {/*background*/}
           <rect width={width} height={height} fill="#f8f8f8" rx={4} />
+          <text x={width / 2} y={25} textAnchor="middle" fill="red">
+            My Title
+          </text>
           {/*axis lines*/}
           {xBreaks.map((d, i) => (
             <g key={i}>
@@ -91,6 +90,7 @@ export default function Home() {
                 opacity={0.2}
                 shapeRendering="crispEdges"
               />
+              {/*axis labels*/}
               <text
                 x={xScale(d)}
                 y={-25}
@@ -124,7 +124,20 @@ export default function Home() {
               fill="#076fa2"
             />
           ))}
+          {/*Pathogen labels*/}
+          {data.map((d, i) => (
+            <text
+              key={i}
+              x={xScale(d.count)}
+              y={yScale(d.name) + yScale.bandwidth() / 2}
+              alignmentBaseline="central"
+              fill="red"
+            >
+              {d.name}
+            </text>
+          ))}
         </g>
+        {/*End of transform group*/}
       </svg>
     </div>
   );
