@@ -128,10 +128,15 @@ export default function Home() {
           {data.map((d, i) => (
             <text
               key={i}
-              x={xScale(d.count)}
+              x={d.count > 10 ? 0 : xScale(d.count)}
               y={yScale(d.name) + yScale.bandwidth() / 2}
+              dx={7}
               alignmentBaseline="central"
-              fill="red"
+              textAnchor="start"
+              fontFamily="Roboto"
+              fontSize={14}
+              fill={d.count > 10 ? "white" : "#076fa2"}
+              fillOpacity={0.9}
             >
               {d.name}
             </text>
