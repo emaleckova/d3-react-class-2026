@@ -1,4 +1,4 @@
-export const data = [
+const economistData = [
   { count: 6, name: "Hantavirus" },
   { count: 7, name: "Tularemia" },
   { count: 7, name: "Dengue" },
@@ -9,3 +9,5 @@ export const data = [
   { count: 18, name: "Vaccinia" },
   { count: 54, name: "Brucella" },
 ];
+
+export default economistData;
