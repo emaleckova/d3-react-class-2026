@@ -14,8 +14,7 @@ export default function EconomistPlot({ data }) {
     .scaleBand()
     .domain(pathogens)
     .range([0, height])
-    .paddingInner(0.2)
-    .paddingOuter(0.2);
+    .paddingInner(0.4);
 
   /*Sequence for horizontal lines*/
   const range = (start, end, step = 5) =>
@@ -28,23 +27,25 @@ export default function EconomistPlot({ data }) {
 
   console.log(xBreaks);
   return (
-    <div>
+    <div className="economist-barplot">
       <svg width={width} height={10} overflow="visible">
+        {/*header line*/}
         <line
           x1={0}
           y1={0}
           x2={width - 50}
           y2={0}
-          stroke="rgb(229, 1, 28)"
+          stroke="#E5011C"
           strokeWidth={1}
         />
+        <rect x={0} y={0} width={36} height={9} fill="#E5011C" />
       </svg>
       {/* title & subtitle */}
       <h1>Escape artists</h1>
       <p>Number of laboratory-acquired infections, 1970-2021</p>
       <svg width={width} height={height} overflow="visible">
         {/*background*/}
-        <rect width={width} height={height} fill="#f8f8f8" rx={4} />
+        <rect width={width} height={height} fill="#f8f8f8" />
         {/*axis lines*/}
         {xBreaks.map((d, i) => (
           <g key={i}>
@@ -108,28 +109,14 @@ export default function EconomistPlot({ data }) {
             {d.name}
           </text>
         ))}
-        <text
-          x={0}
-          y={height + 10}
-          fontFamily="Roboto"
-          fontSize={12}
-          textAnchor="start"
-          fill="gray"
-        >
+      </svg>
+      <div className="footnotes">
+        <p className="footnote">
           Sources: Laboratory-Acquired Infection Database; American Biological
           Safety Association
-        </text>
-        <text
-          x={0}
-          y={height + 25}
-          fontFamily="Roboto"
-          fontSize={12}
-          textAnchor="start"
-          fill="#808080"
-        >
-          The Economist
-        </text>
-      </svg>
+        </p>
+        <p className="footnote">The Economist</p>
+      </div>
     </div>
   );
 }
