@@ -4,7 +4,7 @@ import { AxisBottom } from "./AxisBottom";
 import { AxisLeft } from "./AxisLeft";
 
 const width = 600;
-const height = 500;
+const height = 450;
 
 const MARGIN = {
   top: 20,
@@ -56,7 +56,7 @@ export default function GapminderPlot({ data }) {
             <AxisBottom
               xScale={xScale}
               pixelsPerTick={60}
-              label={"GDP per capita"}
+              label={"GDP per capita (USD)"}
             />
           </g>
           <AxisLeft

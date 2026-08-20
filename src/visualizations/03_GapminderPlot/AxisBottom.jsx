@@ -31,7 +31,7 @@ export const AxisBottom = ({ xScale, pixelsPerTick, label }) => {
               transform: "translateY(20px)",
             }}
           >
-            {value}
+            {value / 1000} K
           </text>
         </g>
       ))}
