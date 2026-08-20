@@ -28,6 +28,7 @@ export const AxisLeft = ({ yScale, pixelsPerTick, label }) => {
             style={{
               fontSize: "10px",
               textAnchor: "middle",
+              alignmentBaseline: "middle",
               transform: "translateX(-20px)",
             }}
           >
