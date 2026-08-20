@@ -27,7 +27,7 @@ export default function GapminderPlot({ data }) {
   console.log(continents);
   const colorScale = scaleOrdinal()
     .domain(continents)
-    .range(["#fffd79", "#e58c60", "#cd6633", "#b3cde0", "#002857"]);
+    .range(["#972D15FF", "#81A88DFF", "#A2A475FF", "#02401BFF", "#D8B70AFF"]);
   console.log("Max is " + maxGdp);
 
   const minRadius = 3;
