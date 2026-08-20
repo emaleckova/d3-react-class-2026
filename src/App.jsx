@@ -4,6 +4,7 @@ import Navigation from "./components/Navigation";
 import Home from "./pages/Home";
 import BarplotPage from "./pages/BarplotPage";
 import EconomistPage from "./pages/EconomistPage";
+import GapminderPage from "./pages/GapminderPage";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/barplot" element={<BarplotPage />} />
         <Route path="/economist" element={<EconomistPage />} />
+        <Route path="/gapminder" element={<GapminderPage />} />
       </Routes>
     </>
   );

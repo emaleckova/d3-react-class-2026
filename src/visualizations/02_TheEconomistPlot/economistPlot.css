@@ -19,6 +19,7 @@
 
 .economist-barplot p {
   font-family: "Roboto", sans-serif;
+  text-align: "start";
   color: #0f172a;
   font-size: 16px;
   margin-top: 10px;

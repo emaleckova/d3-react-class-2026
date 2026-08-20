@@ -6,6 +6,7 @@ export default function Navigation() {
       <Link to="/">Home</Link>
       <Link to="/barplot">Barplot</Link>
       <Link to="/economist">Economist</Link>
+      <Link to="/gapminder">Gapminder</Link>
     </nav>
   );
 }
