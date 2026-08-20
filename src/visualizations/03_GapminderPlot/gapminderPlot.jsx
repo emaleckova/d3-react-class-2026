@@ -1,6 +1,7 @@
-//import { AxisBottom } from "./AxisBottom";
-
 import { scaleLinear, scaleOrdinal, scaleSqrt, min, max } from "d3";
+
+import { AxisBottom } from "./AxisBottom";
+import { AxisLeft } from "./AxisLeft";
 
 const width = 600;
 const height = 500;
@@ -8,8 +9,8 @@ const height = 500;
 const MARGIN = {
   top: 20,
   right: 20,
-  bottom: 20,
-  left: 10,
+  bottom: 50,
+  left: 50,
 };
 
 export default function GapminderPlot({ data }) {
@@ -38,6 +39,7 @@ export default function GapminderPlot({ data }) {
     <div className="gapminder-plot">
       <svg width={width} height={height}>
         <g transform={`translate(${MARGIN.left}, ${MARGIN.top})`}>
+          {/* Data points */}
           {data.map((d, i) => (
             <circle
               key={i}
@@ -49,6 +51,19 @@ export default function GapminderPlot({ data }) {
               opacity={0.35}
             />
           ))}
+          {/* Axes */}
+          <g transform={`translate(0, ${boundsHeight})`}>
+            <AxisBottom
+              xScale={xScale}
+              pixelsPerTick={60}
+              label={"GDP per capita"}
+            />
+          </g>
+          <AxisLeft
+            yScale={yScale}
+            pixelsPerTick={60}
+            label={"Life expectancy"}
+          />
         </g>
       </svg>
     </div>
