@@ -2,7 +2,7 @@
 
 import { scaleLinear, scaleOrdinal, scaleSqrt, min, max } from "d3";
 
-const width = 500;
+const width = 600;
 const height = 500;
 
 const MARGIN = {
@@ -25,14 +25,14 @@ export default function GapminderPlot({ data }) {
   console.log(continents);
   const colorScale = scaleOrdinal()
     .domain(continents)
-    .range(["#000000", "EE334E", "FCB131", "0081C8", "00A651"]);
+    .range(["#000000", "#EE334E", "#FCB131", "#0081C8", "#00A651"]);
   console.log("Max is " + maxGdp);
 
   const xScale = scaleLinear().domain([0, maxGdp]).range([0, boundsWidth]);
   const yScale = scaleLinear().domain([0, maxLifeExp]).range([boundsHeight, 0]);
   const popSizeScale = scaleSqrt()
     .domain([minPopulation, maxPopulation])
-    .range([2, 20]);
+    .range([3, 30]);
 
   return (
     <div className="gapminder-plot">
@@ -44,9 +44,9 @@ export default function GapminderPlot({ data }) {
               cx={xScale(d.gdpPercap)}
               cy={yScale(d.lifeExp)}
               r={popSizeScale(d.pop)}
-              stroke="black"
-              fill="black"
-              opacity={0.5}
+              stroke={colorScale(d.continent)}
+              fill={colorScale(d.continent)}
+              opacity={0.35}
             />
           ))}
         </g>
