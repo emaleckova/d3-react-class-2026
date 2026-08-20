@@ -3,8 +3,8 @@ import { scaleLinear, scaleOrdinal, scaleSqrt, min, max } from "d3";
 import { AxisBottom } from "./AxisBottom";
 import { AxisLeft } from "./AxisLeft";
 
-const width = 600;
-const height = 450;
+const width = 650;
+const height = 550;
 
 const MARGIN = {
   top: 20,
@@ -18,6 +18,7 @@ export default function GapminderPlot({ data }) {
   const boundsHeight = height - MARGIN.top - MARGIN.bottom;
 
   const maxGdp = max(data, (d) => d.gdpPercap);
+  const minLifeExp = min(data, (d) => d.lifeExp);
   const maxLifeExp = max(data, (d) => d.lifeExp);
   const minPopulation = min(data, (d) => d.pop);
   const maxPopulation = max(data, (d) => d.pop);
@@ -26,14 +27,21 @@ export default function GapminderPlot({ data }) {
   console.log(continents);
   const colorScale = scaleOrdinal()
     .domain(continents)
-    .range(["#000000", "#EE334E", "#FCB131", "#0081C8", "#00A651"]);
+    .range(["#fffd79", "#e58c60", "#cd6633", "#b3cde0", "#002857"]);
   console.log("Max is " + maxGdp);
 
-  const xScale = scaleLinear().domain([0, maxGdp]).range([0, boundsWidth]);
-  const yScale = scaleLinear().domain([0, maxLifeExp]).range([boundsHeight, 0]);
+  const minRadius = 3;
+  const maxRadius = 30;
   const popSizeScale = scaleSqrt()
     .domain([minPopulation, maxPopulation])
-    .range([3, 30]);
+    .range([minRadius, maxRadius]);
+
+  const xScale = scaleLinear()
+    .domain([0, maxGdp])
+    .range([maxRadius, boundsWidth - maxRadius]);
+  const yScale = scaleLinear()
+    .domain([minLifeExp, maxLifeExp])
+    .range([boundsHeight - maxRadius, minLifeExp]);
 
   return (
     <div className="gapminder-plot">
@@ -47,8 +55,9 @@ export default function GapminderPlot({ data }) {
               cy={yScale(d.lifeExp)}
               r={popSizeScale(d.pop)}
               stroke={colorScale(d.continent)}
+              strokeWidth={0.5}
               fill={colorScale(d.continent)}
-              opacity={0.35}
+              fillOpacity={0.5}
             />
           ))}
           {/* Axes */}
