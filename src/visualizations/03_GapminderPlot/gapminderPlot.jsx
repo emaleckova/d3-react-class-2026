@@ -17,9 +17,11 @@ export default function GapminderPlot({ data }) {
   const boundsWidth = width - MARGIN.left - MARGIN.right;
   const boundsHeight = height - MARGIN.top - MARGIN.bottom;
 
-  const maxGdp = max(data, (d) => d.gdpPercap);
-  const minLifeExp = min(data, (d) => d.lifeExp);
-  const maxLifeExp = max(data, (d) => d.lifeExp);
+  const maxGdp = Math.ceil(max(data, (d) => d.gdpPercap) / 1000) * 1000;
+  console.log("Max GDP is " + maxGdp);
+  const minLifeExp = Math.floor(min(data, (d) => d.lifeExp) / 5) * 5;
+  console.log("Min life expectancy is " + minLifeExp);
+  const maxLifeExp = Math.ceil(max(data, (d) => d.lifeExp) / 5) * 5;
   const minPopulation = min(data, (d) => d.pop);
   const maxPopulation = max(data, (d) => d.pop);
 
@@ -28,7 +30,6 @@ export default function GapminderPlot({ data }) {
   const colorScale = scaleOrdinal()
     .domain(continents)
     .range(["#972D15FF", "#81A88DFF", "#A2A475FF", "#02401BFF", "#D8B70AFF"]);
-  console.log("Max is " + maxGdp);
 
   const minRadius = 3;
   const maxRadius = 30;
@@ -74,13 +75,13 @@ export default function GapminderPlot({ data }) {
           <g transform={`translate(0, ${boundsHeight})`}>
             <AxisBottom
               xScale={xScale}
-              pixelsPerTick={60}
+              pixelsPerTick={50}
               label={"GDP per capita (USD)"}
             />
           </g>
           <AxisLeft
             yScale={yScale}
-            pixelsPerTick={60}
+            pixelsPerTick={50}
             label={"Life expectancy"}
           />
         </g>
