@@ -46,6 +46,16 @@ export default function GapminderPlot({ data }) {
   return (
     <div className="gapminder-plot">
       <svg width={width} height={height}>
+        <text
+          x={boundsWidth / 2}
+          y={MARGIN.top}
+          fill="#808080"
+          fontSize="20px"
+          textAnchor="middle"
+          alignmentBaseline="middle"
+        >
+          Title
+        </text>
         <g transform={`translate(${MARGIN.left}, ${MARGIN.top})`}>
           {/* Data points */}
           {data.map((d, i) => (
