@@ -1,4 +1,4 @@
-import { scaleLinear, scaleOrdinal, scaleSqrt, min, max } from "d3";
+import { scaleLinear, scaleOrdinal, scaleSqrt, min, max, ticks } from "d3";
 
 import { AxisBottom } from "./AxisBottom";
 import { AxisLeft } from "./AxisLeft";
@@ -24,6 +24,26 @@ export default function GapminderPlot({ data }) {
   const maxLifeExp = Math.ceil(max(data, (d) => d.lifeExp) / 5) * 5;
   const minPopulation = min(data, (d) => d.pop);
   const maxPopulation = max(data, (d) => d.pop);
+  console.log("Min population is " + minPopulation);
+  console.log("Max population is " + maxPopulation);
+
+  {
+    /* Transfromed populations for a legend: min, max and two intermediate values */
+  }
+  const minPopLegend = Math.floor(minPopulation / 1000) * 1000;
+  const maxPopLegend = Math.ceil(maxPopulation / 1000) * 1000;
+  console.log("Min population legend is " + minPopLegend);
+  console.log("Max population legend is " + maxPopLegend);
+  const popDivision = maxPopLegend / minPopLegend;
+  console.log("Pop division: " + popDivision);
+  const popSteps = maxPopLegend / popDivision;
+  console.log("Population steps to max: " + popSteps);
+  const popLegendData = [
+    minPopLegend,
+    minPopLegend + (popSteps / 2) * popDivision,
+    maxPopLegend,
+  ];
+  console.log("Population legend is " + popLegendData);
 
   const continents = [...new Set(data.map((d) => d.continent))].sort();
   console.log(continents);
@@ -31,10 +51,10 @@ export default function GapminderPlot({ data }) {
     .domain(continents)
     .range(["#972D15FF", "#81A88DFF", "#A2A475FF", "#02401BFF", "#D8B70AFF"]);
 
-  const minRadius = 3;
-  const maxRadius = 30;
+  const minRadius = 2;
+  const maxRadius = 40;
   const popSizeScale = scaleSqrt()
-    .domain([minPopulation, maxPopulation])
+    .domain([minPopLegend, maxPopLegend])
     .range([minRadius, maxRadius]);
 
   const xScale = scaleLinear()
@@ -71,6 +91,20 @@ export default function GapminderPlot({ data }) {
               fillOpacity={0.5}
             />
           ))}
+          {/* Population legend */}
+          {popLegendData.map((d, i) => (
+            <circle
+              key={i}
+              cx={xScale(maxGdp * 0.9)}
+              cy={yScale(minLifeExp * 1.15)}
+              r={popSizeScale(d)}
+              stroke="black"
+              strokeWidth={0.25}
+              fill="black"
+              fillOpacity={0.05}
+            />
+          ))}
+
           {/* Axes */}
           <g transform={`translate(0, ${boundsHeight})`}>
             <AxisBottom
