@@ -39,11 +39,10 @@ export default function GapminderPlot({ data }) {
   const popSteps = maxPopLegend / popDivision;
   console.log("Population steps to max: " + popSteps);
   const popLegendData = [
-    minPopLegend,
-    minPopLegend + (popSteps / 2) * popDivision,
-    maxPopLegend,
+    { label: "10 M", value: 100000000 },
+    { label: "50 M", value: 500000000 },
+    { label: "1 B", value: 1000000000 },
   ];
-  console.log("Population legend is " + popLegendData);
 
   const continents = [...new Set(data.map((d) => d.continent))].sort();
   console.log(continents);
@@ -92,17 +91,48 @@ export default function GapminderPlot({ data }) {
             />
           ))}
           {/* Population legend */}
+          {/* Circles */}
           {popLegendData.map((d, i) => (
-            <circle
-              key={i}
-              cx={xScale(maxGdp * 0.9)}
-              cy={yScale(minLifeExp * 1.15)}
-              r={popSizeScale(d)}
-              stroke="black"
-              strokeWidth={0.25}
-              fill="black"
-              fillOpacity={0.05}
-            />
+            <>
+              <circle
+                key={i}
+                cx={xScale(maxGdp * 0.85)}
+                cy={yScale(minLifeExp * 1.15)}
+                r={popSizeScale(d.value)}
+                stroke="black"
+                strokeDasharray="5,2"
+                strokeWidth={0.5}
+                fill="none"
+              />
+              <line
+                x1={xScale(maxGdp * 0.85)}
+                x2={xScale(maxGdp * 0.85) + 50}
+                y1={yScale(minLifeExp * 1.15) - popSizeScale(d.value)}
+                y2={yScale(minLifeExp * 1.15) - popSizeScale(d.value)}
+                stroke="black"
+                strokeDasharray="5,2"
+              ></line>
+              <text
+                x={xScale(maxGdp * 0.85)}
+                y={yScale(minLifeExp * 1.35)}
+                fontSize="9px"
+                textAnchor="middle"
+                alignmentBaseline="middle"
+                fill="black"
+              >
+                Population size
+              </text>
+              <text
+                x={xScale(maxGdp * 0.85) + 55}
+                y={yScale(minLifeExp * 1.15) - popSizeScale(d.value)}
+                textAnchor="left"
+                alignmentBaseline="middle"
+                fill="black"
+                fontSize="9px"
+              >
+                {d.label}
+              </text>
+            </>
           ))}
 
           {/* Axes */}
