@@ -7,7 +7,7 @@ const width = 650;
 const height = 550;
 
 const MARGIN = {
-  top: 20,
+  top: 50,
   right: 20,
   bottom: 50,
   left: 50,
@@ -66,17 +66,28 @@ export default function GapminderPlot({ data }) {
   return (
     <div className="gapminder-plot">
       <svg width={width} height={height}>
-        <text
-          x={boundsWidth / 2}
-          y={MARGIN.top}
-          fill="#808080"
-          fontSize="20px"
-          textAnchor="middle"
-          alignmentBaseline="middle"
-        >
-          Title
-        </text>
         <g transform={`translate(${MARGIN.left}, ${MARGIN.top})`}>
+          {/*Title and subtitle*/}
+          <text
+            x={boundsWidth / 2}
+            y={0}
+            fill="#808080"
+            fontSize="20px"
+            textAnchor="middle"
+            alignmentBaseline="top"
+          >
+            GDP per Capita vs Life Expectancy{" "}
+          </text>
+          <text
+            x={boundsWidth / 2}
+            y={MARGIN.top / 2}
+            fill="#808080"
+            fontSize="15px"
+            textAnchor="middle"
+            alignmentBaseline="bottom"
+          >
+            Increasing wealth means longer life
+          </text>
           {/* Data points */}
           {data.map((d, i) => (
             <circle
@@ -144,7 +155,7 @@ export default function GapminderPlot({ data }) {
           </g>
           <AxisLeft
             yScale={yScale}
-            pixelsPerTick={50}
+            pixelsPerTick={40}
             label={"Life expectancy"}
           />
           {/* Continent legend */}
