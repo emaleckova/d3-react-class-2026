@@ -91,12 +91,21 @@ export default function GapminderPlot({ data }) {
             />
           ))}
           {/* Population legend */}
-          {/* Circles */}
           {popLegendData.map((d, i) => (
             <>
+              <text
+                x={xScale(maxGdp * 0.75)}
+                y={yScale(minLifeExp * 1.35)}
+                fontSize="9px"
+                textAnchor="left"
+                alignmentBaseline="middle"
+                fill="black"
+              >
+                Population size
+              </text>
               <circle
                 key={i}
-                cx={xScale(maxGdp * 0.85)}
+                cx={xScale(maxGdp * 0.75) + popSizeScale(d.value)}
                 cy={yScale(minLifeExp * 1.15)}
                 r={popSizeScale(d.value)}
                 stroke="black"
@@ -105,25 +114,15 @@ export default function GapminderPlot({ data }) {
                 fill="none"
               />
               <line
-                x1={xScale(maxGdp * 0.85)}
-                x2={xScale(maxGdp * 0.85) + 50}
+                x1={xScale(maxGdp * 0.75) + popSizeScale(d.value)}
+                x2={xScale(maxGdp * 0.75) + 85}
                 y1={yScale(minLifeExp * 1.15) - popSizeScale(d.value)}
                 y2={yScale(minLifeExp * 1.15) - popSizeScale(d.value)}
                 stroke="black"
                 strokeDasharray="5,2"
               ></line>
               <text
-                x={xScale(maxGdp * 0.85)}
-                y={yScale(minLifeExp * 1.35)}
-                fontSize="9px"
-                textAnchor="middle"
-                alignmentBaseline="middle"
-                fill="black"
-              >
-                Population size
-              </text>
-              <text
-                x={xScale(maxGdp * 0.85) + 55}
+                x={xScale(maxGdp * 0.75) + 95}
                 y={yScale(minLifeExp * 1.15) - popSizeScale(d.value)}
                 textAnchor="left"
                 alignmentBaseline="middle"
