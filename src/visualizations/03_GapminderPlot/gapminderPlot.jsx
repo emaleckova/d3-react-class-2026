@@ -86,7 +86,7 @@ export default function GapminderPlot({ data }) {
             textAnchor="middle"
             alignmentBaseline="bottom"
           >
-            Increasing wealth means longer life
+            Increasing wealth increases chances for a longer life
           </text>
           {/* Data points */}
           {data.map((d, i) => (
