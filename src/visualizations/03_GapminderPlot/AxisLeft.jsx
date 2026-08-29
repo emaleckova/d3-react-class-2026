@@ -25,12 +25,10 @@ export const AxisLeft = ({ yScale, pixelsPerTick, label }) => {
           <line x1={0} x2={-TICK_LENGTH} stroke="currentColor" />
           <text
             key={value}
-            style={{
-              fontSize: "10px",
-              textAnchor: "middle",
-              alignmentBaseline: "middle",
-              transform: "translateX(-20px)",
-            }}
+            fontSize={10}
+            textAnchor="middle"
+            alignmentBaseline="middle"
+            transform="translate(-20, 0)"
           >
             {value}
           </text>
@@ -42,6 +40,7 @@ export const AxisLeft = ({ yScale, pixelsPerTick, label }) => {
           x={-height / 2}
           y={-40}
           fontSize={12}
+          fontWeight="bold"
           textAnchor="middle"
           transform="rotate(-90)"
         >

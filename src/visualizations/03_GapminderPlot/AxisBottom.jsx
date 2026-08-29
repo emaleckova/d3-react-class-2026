@@ -25,11 +25,9 @@ export const AxisBottom = ({ xScale, pixelsPerTick, label }) => {
           <line y2={TICK_LENGTH} stroke="currentColor" />
           <text
             key={value}
-            style={{
-              fontSize: "10px",
-              textAnchor: "middle",
-              transform: "translateY(20px)",
-            }}
+            fontSize={10}
+            textAnchor="middle"
+            transform="translate(0, 20)"
           >
             {value / 1000} K
           </text>
@@ -39,11 +37,10 @@ export const AxisBottom = ({ xScale, pixelsPerTick, label }) => {
       {label && (
         <text
           x={width / 2}
-          style={{
-            fontSize: "10px",
-            textAnchor: "middle",
-            transform: "translateY(40px)",
-          }}
+          fontSize={12}
+          fontWeight="bold"
+          textAnchor="middle"
+          transform="translate(0, 40)"
         >
           {label}
         </text>
