@@ -2,6 +2,7 @@ import { scaleLinear, scaleOrdinal, scaleSqrt, min, max, ticks } from "d3";
 
 import { AxisBottom } from "./AxisBottom";
 import { AxisLeft } from "./AxisLeft";
+import { BubblePlot } from "./BubblePlot";
 import { ContinentsLegend } from "./ContinentsLegend";
 import { PopulationSizeLegend } from "./PopulationSizeLegend";
 
@@ -91,18 +92,13 @@ export default function GapminderPlot({ data }) {
             Increasing wealth increases chances for a longer life
           </text>
           {/* Data points */}
-          {data.map((d, i) => (
-            <circle
-              key={i}
-              cx={xScale(d.gdpPercap)}
-              cy={yScale(d.lifeExp)}
-              r={popSizeScale(d.pop)}
-              stroke={colorScale(d.continent)}
-              strokeWidth={0.5}
-              fill={colorScale(d.continent)}
-              fillOpacity={0.5}
-            />
-          ))}
+          <BubblePlot
+            data={data}
+            xScale={xScale}
+            yScale={yScale}
+            popSizeScale={popSizeScale}
+            colorScale={colorScale}
+          />
           {/* Population legend */}
           <PopulationSizeLegend
             popLegendData={popLegendData}
