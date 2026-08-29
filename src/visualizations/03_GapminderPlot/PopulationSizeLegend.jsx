@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+
 export const PopulationSizeLegend = ({
   popLegendData,
   xScale,
@@ -10,7 +12,7 @@ export const PopulationSizeLegend = ({
   return (
     <>
       {popLegendData.map((d, i) => (
-        <>
+        <Fragment key={d.country}>
           {label && (
             <text
               x={xScale(maxGdp * 0.75)}
@@ -53,7 +55,7 @@ export const PopulationSizeLegend = ({
           >
             {d.label}
           </text>
-        </>
+        </Fragment>
       ))}
     </>
   );
