@@ -1,11 +1,10 @@
 import EnergyDashboard from "../visualizations/04_EnergyDashboard/EnergyDashboard";
-import EnergyData from "../visualizations/04_EnergyDashboard/EnergyData";
+import energyData from "../visualizations/04_EnergyDashboard/energyData";
 
 export default function EnergyPage() {
   return (
-    <div>
-      <h3 style={{ color: "#505797" }}>First Cohort of React ❤️ Students</h3>
-      <EnergyDashboard data={EnergyData} />
-    </div>
+    <svg width={600} height={600}>
+      <EnergyDashboard data={energyData} />
+    </svg>
   );
 }

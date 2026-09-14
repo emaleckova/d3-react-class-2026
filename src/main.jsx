@@ -5,7 +5,7 @@ import "./index.css";
 import App from "./App";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
+  <BrowserRouter basename="/d3-react-class-2026">
     <App />
   </BrowserRouter>,
 );
