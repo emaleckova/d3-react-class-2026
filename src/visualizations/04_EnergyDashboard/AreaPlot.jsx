@@ -10,7 +10,7 @@ const MARGIN = {
 const width = 600;
 const height = 600;
 
-export function ConnectedScatterplot({ data, width, height }) {
+export function AreaPlot({ data, width, height }) {
   // Conversion: numerical year to date
   data = data.map((d) => ({
     ...d,
@@ -29,33 +29,28 @@ export function ConnectedScatterplot({ data, width, height }) {
     .domain([0, yMax || 0])
     .range([boundsHeight, 0]);
 
-  // Build the line
-  const lineBuilder = d3
-    .line()
+  // Build the area
+  const areaBuilder = d3
+    .area()
     .x((d) => xScale(d.year))
-    .y((d) => yScale(d.primary_energy));
-  const linePath = lineBuilder(data);
-  if (!linePath) {
+    .y1((d) => yScale(d.primary_energy))
+    .y0((d) => yScale(0));
+  const areaPath = areaBuilder(data);
+  if (!areaPath) {
     return null;
   }
-  // Build the circles
-  const allCircles = data.map((item, i) => {
-    return (
-      <circle
-        key={i}
-        cx={xScale(item.year)}
-        cy={yScale(item.primary_energy)}
-        r={4}
-        fill={"#cb1dd1"}
-      />
-    );
-  });
+
   // SVG plot
   return (
     <svg width={width} height={height}>
       <g transform={`translate(${MARGIN.left},${MARGIN.top})`}>
-        <path d={linePath} fill="none" stroke="#cb1dd1" />
-        {allCircles}
+        <path
+          d={areaPath}
+          // scale_colour_paletteer_d("yarrr::basel")
+          fill="#16A08CFF"
+          stroke="#16A08CFF"
+          fillOpacity={0.5}
+        />
       </g>
     </svg>
   );
