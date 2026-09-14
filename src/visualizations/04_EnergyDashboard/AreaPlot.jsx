@@ -1,5 +1,7 @@
 import * as d3 from "d3";
+import { useRef } from "react";
 
+import { useDimensions } from "./useDimensions"
 import { AxisLeft } from "./AxisLeft"
 import { AxisBottomYear } from "./AxisBottomYear";
 
@@ -10,14 +12,17 @@ const MARGIN = {
   left: 50,
 };
 
-const width = 600;
-const height = 600;
-
-export function AreaPlot({ data, width, height }) {
+// Static area plot
+export const AreaPlot = ({ data, width, height }) => {
+  console.log("AreaPlot size:", width, height);
+  // Prevent running the code while container measurement still ongoing
+  if (!width || !height) {
+    return null;
+  }
   // Conversion: numerical year to date
   data = data.map((d) => ({
     ...d,
-    year: new Date(d.year, 1, 1), // Jan 1st of each year
+    year: new Date(d.year, 0, 1), // Jan 1st of each year
   }));
   const boundsWidth = width - MARGIN.left - MARGIN.right;
   const boundsHeight = height - MARGIN.top - MARGIN.bottom;
@@ -54,7 +59,7 @@ export function AreaPlot({ data, width, height }) {
   // SVG plot
   return (
     <svg width={width} height={height}>
-      <rect width="100%" height="100%" fill="white" />
+      <rect width={width} height={height} fill="white" rx={5} />
       <g transform={`translate(${MARGIN.left},${MARGIN.top})`}>
         <path
           d={areaPath}
@@ -80,3 +85,19 @@ export function AreaPlot({ data, width, height }) {
     </svg>
   );
 }
+
+// Responsive version
+export const ResponsiveAreaPlot = (props) => {
+  const chartRef = useRef(null);
+  const chartSize = useDimensions(chartRef);
+
+  return (
+    <div ref={chartRef} style={{width: "95%", aspectRatio: "16 / 9"}}>
+      <AreaPlot 
+        height={chartSize.height}
+        width={chartSize.width}
+        {...props}
+      />
+    </div>
+  );
+};
