@@ -36,7 +36,15 @@ export function AreaPlot({ data, width, height }) {
     .y1((d) => yScale(d.primary_energy))
     .y0((d) => yScale(0));
   const areaPath = areaBuilder(data);
-  if (!areaPath) {
+
+  // Build the line
+  const lineBuilder = d3
+    .line()
+    .x((d) => xScale(d.year))
+    .y((d) => yScale(d.primary_energy));
+  const linePath = lineBuilder(data);
+
+  if (!areaPath || !linePath) {
     return null;
   }
 
@@ -47,9 +55,16 @@ export function AreaPlot({ data, width, height }) {
         <path
           d={areaPath}
           // scale_colour_paletteer_d("yarrr::basel")
-          fill="#16A08CFF"
-          stroke="#16A08CFF"
+          fill="#16A08C"
+          stroke="none"
           fillOpacity={0.5}
+        />
+        <path
+          d={linePath}
+          opacity={1}
+          stroke="#16A08C"
+          fill="none"
+          strokeWidth={2}
         />
       </g>
     </svg>
