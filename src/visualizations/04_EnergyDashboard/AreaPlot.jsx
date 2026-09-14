@@ -1,5 +1,8 @@
 import * as d3 from "d3";
 
+import { AxisLeft } from "./AxisLeft"
+import { AxisBottomYear } from "./AxisBottomYear";
+
 const MARGIN = {
   top: 20,
   right: 20,
@@ -51,6 +54,7 @@ export function AreaPlot({ data, width, height }) {
   // SVG plot
   return (
     <svg width={width} height={height}>
+      <rect width="100%" height="100%" fill="white" />
       <g transform={`translate(${MARGIN.left},${MARGIN.top})`}>
         <path
           d={areaPath}
@@ -66,6 +70,12 @@ export function AreaPlot({ data, width, height }) {
           fill="none"
           strokeWidth={2}
         />
+        {/* y-axis */}
+        <AxisLeft yScale ={yScale} pixelsPerTick={50} label="energy consumption [TWh]"/>
+        {/* x-axis: years */}
+        <g transform={`translate(0, ${boundsHeight})`}>
+          <AxisBottomYear xScale={xScale} pixelsPerTick={50} />
+        </g>
       </g>
     </svg>
   );
