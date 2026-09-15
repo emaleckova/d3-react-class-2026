@@ -49,8 +49,16 @@ console.log(worldPrimaryEnergeFirstYear);
 export default function EnergyDashboard() {
   return (
     <div>
-      {/*<ResponsiveAreaPlot data={worldPrimaryEnergy} />*/}
-      <ResponsiveDonutChartByType data = {worldEnergyFirstYear} width={600} height={600} fillScale={TypeColorScale} label={`${worldPrimaryEnergeFirstYear} TWh`}/>
+      <h3>Energy Dashboard</h3>
+      {/*Container for all plots*/}
+      <div style={{ display: "flex", gap: 5 }}>
+      <div style={{ flex: 1, minWidth: 0 }}>
+      <ResponsiveAreaPlot data={worldPrimaryEnergy} />
+      </div>
+      <div style={{ flex: 1, minWidth: 0 }}>
+      <ResponsiveDonutChartByType data = {worldEnergyFirstYear} fillScale={TypeColorScale} label={`${worldPrimaryEnergeFirstYear} TWh`}/>
+      </div>
+    </div>
     </div>
   );
 }
