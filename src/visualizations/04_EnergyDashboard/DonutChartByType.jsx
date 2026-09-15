@@ -1,8 +1,16 @@
 import * as d3 from "d3";
+import { useRef } from "react";
+
+import { useDimensions } from "./useDimensions"
 
 const MARGIN = 30;
 
 export const DonutChartByType = ({data, width, height, fillScale, label}) => {
+    // Prevent running the code while container measurement still ongoing
+    if (!width || !height) {
+        return null;
+    }
+
     const radius = Math.min(width, height) / 2 - MARGIN;
 
     // angle calculation (but NO svg yet!)
@@ -36,5 +44,21 @@ export const DonutChartByType = ({data, width, height, fillScale, label}) => {
         </text>
         </g>
         </svg>
+    );
+};
+
+// Responsive version
+export const ResponsiveDonutChartByType = (props) => {
+    const chartRef = useRef(null);
+    const chartSize = useDimensions(chartRef);
+
+    return (
+        <div ref={chartRef} style={{width: "95%", aspectRatio: "1/1"}}>
+            <DonutChartByType
+                height={chartSize.height}
+                width={chartSize.width}
+                {...props}
+            />
+        </div>
     );
 };

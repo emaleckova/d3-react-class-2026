@@ -1,7 +1,7 @@
 import * as d3 from "d3";
 
 import { ResponsiveAreaPlot } from "./AreaPlot";
-import { DonutChartByType } from "./DonutChartByType"
+import { ResponsiveDonutChartByType } from "./DonutChartByType"
 import energyData from "./energyData";
 
 // Colours by energy type
@@ -50,7 +50,7 @@ export default function EnergyDashboard() {
   return (
     <div>
       {/*<ResponsiveAreaPlot data={worldPrimaryEnergy} />*/}
-      <DonutChartByType data = {worldEnergyFirstYear} width={600} height={600} fillScale={TypeColorScale} label={`${worldPrimaryEnergeFirstYear} TWh`}/>
+      <ResponsiveDonutChartByType data = {worldEnergyFirstYear} width={600} height={600} fillScale={TypeColorScale} label={`${worldPrimaryEnergeFirstYear} TWh`}/>
     </div>
   );
 }
