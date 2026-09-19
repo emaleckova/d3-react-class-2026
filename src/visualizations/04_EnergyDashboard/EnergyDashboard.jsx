@@ -39,12 +39,27 @@ const worldEnergyFirstYear = Object.entries(
   }));
 console.log(worldEnergyFirstYear);
 
+const worldEnergyLastYear = Object.entries(
+  energyData.find(
+    d => d.country === "World" && d.year === lastYear
+  )
+)
+  .filter(([key]) => !["country", "year", "primary_energy"].includes(key))
+  .map(([energyType, value]) => ({
+    energyType,
+    value
+  }));
+console.log(worldEnergyLastYear);
+
 // Total global consumption in the given year
-const worldPrimaryEnergeFirstYear = worldPrimaryEnergy.find(
+const worldPrimaryEnergyFirstYear = worldPrimaryEnergy.find(
   (world) => world.year === firstYear
 ).primary_energy;
-console.log(worldPrimaryEnergeFirstYear);
+console.log(worldPrimaryEnergyFirstYear);
 
+const worldPrimaryEnergyLastYear = worldPrimaryEnergy.find(
+  (world) => world.year === lastYear
+).primary_energy;
 
 export default function EnergyDashboard() {
   return (
@@ -56,7 +71,10 @@ export default function EnergyDashboard() {
       <ResponsiveAreaPlot data={worldPrimaryEnergy} />
       </div>
       <div style={{ flex: 1, minWidth: 0 }}>
-      <ResponsiveDonutChartByType data = {worldEnergyFirstYear} fillScale={TypeColorScale} label={`${worldPrimaryEnergeFirstYear} TWh`}/>
+      <ResponsiveDonutChartByType data = {worldEnergyFirstYear} fillScale={TypeColorScale} label={`${worldPrimaryEnergyFirstYear} TWh`}/>
+      </div>
+      <div style={{ flex: 1, minWidth: 0 }}>
+      <ResponsiveDonutChartByType data = {worldEnergyLastYear} fillScale={TypeColorScale} label={`${worldPrimaryEnergyLastYear} TWh`}/>
       </div>
     </div>
     </div>
