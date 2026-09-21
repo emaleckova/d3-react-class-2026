@@ -1,8 +1,8 @@
 import * as d3 from "d3";
 import { useRef } from "react";
 
-import { useDimensions } from "./useDimensions"
-import { AxisLeft } from "./AxisLeft"
+import { useDimensions } from "./useDimensions";
+import { AxisLeft } from "./AxisLeft";
 import { AxisBottomYear } from "./AxisBottomYear";
 
 const MARGIN = {
@@ -76,7 +76,11 @@ export const AreaPlot = ({ data, width, height }) => {
           strokeWidth={2}
         />
         {/* y-axis */}
-        <AxisLeft yScale ={yScale} pixelsPerTick={50} label="energy consumption [TWh]"/>
+        <AxisLeft
+          yScale={yScale}
+          pixelsPerTick={50}
+          label="energy consumption [TWh]"
+        />
         {/* x-axis: years */}
         <g transform={`translate(0, ${boundsHeight})`}>
           <AxisBottomYear xScale={xScale} pixelsPerTick={50} />
@@ -84,7 +88,7 @@ export const AreaPlot = ({ data, width, height }) => {
       </g>
     </svg>
   );
-}
+};
 
 // Responsive version
 export const ResponsiveAreaPlot = (props) => {
@@ -92,12 +96,8 @@ export const ResponsiveAreaPlot = (props) => {
   const chartSize = useDimensions(chartRef);
 
   return (
-    <div ref={chartRef} style={{width: "95%", aspectRatio: "16 / 9"}}>
-      <AreaPlot 
-        height={chartSize.height}
-        width={chartSize.width}
-        {...props}
-      />
+    <div ref={chartRef} style={{ width: "100%", height: "100%" }}>
+      <AreaPlot height={chartSize.height} width={chartSize.width} {...props} />
     </div>
   );
 };
