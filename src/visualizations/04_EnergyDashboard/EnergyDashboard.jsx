@@ -84,25 +84,71 @@ export default function EnergyDashboard() {
     >
       {/*Above: Container for all plots*/}
       <h3>Energy Dashboard</h3>
-      {/*Area plot*/}
-      <div style={{ flex: 1, minHeight: 0 }}>
-        <ResponsiveAreaPlot data={worldPrimaryEnergy} />
-      </div>
-      {/*Common container for both donuts*/}
-      <div style={{ display: "flex", flex: 1, gap: SPACING, minHeight: 0 }}>
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <ResponsiveDonutChartByType
-            data={worldEnergyFirstYear}
-            fillScale={TypeColorScale}
-            label={`${worldPrimaryEnergyFirstYear} TWh`}
-          />
+      {/*Area section*/}
+      <div
+        style={{
+          flex: 1,
+          minHeight: 0,
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <h4 style={{ margin: 0 }}>
+          {`Global energy consumption: ${firstYear} - ${lastYear}`}
+        </h4>
+        <div style={{ flex: 1, minHeight: 0 }}>
+          <ResponsiveAreaPlot data={worldPrimaryEnergy} />
         </div>
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <ResponsiveDonutChartByType
-            data={worldEnergyLastYear}
-            fillScale={TypeColorScale}
-            label={`${worldPrimaryEnergyLastYear} TWh`}
-          />
+      </div>
+      {/*Common container for both donuts & their titles*/}
+      <div
+        style={{
+          display: "flex",
+          flex: 1,
+          gap: SPACING,
+          minHeight: 0,
+        }}
+      >
+        {/*Donut one*/}
+        <div
+          style={{
+            flex: 1,
+            minWidth: 0,
+            minHeight: 0,
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <h4
+            style={{ margin: 0 }}
+          >{`Global energy composition in ${firstYear}`}</h4>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <ResponsiveDonutChartByType
+              data={worldEnergyFirstYear}
+              fillScale={TypeColorScale}
+              label={`${worldPrimaryEnergyFirstYear} TWh`}
+            />
+          </div>
+        </div>
+        <div
+          style={{
+            flex: 1,
+            minWidth: 0,
+            minHeight: 0,
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <h4
+            style={{ margin: 0 }}
+          >{`Global energy composition in ${lastYear}`}</h4>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <ResponsiveDonutChartByType
+              data={worldEnergyLastYear}
+              fillScale={TypeColorScale}
+              label={`${worldPrimaryEnergyLastYear} TWh`}
+            />
+          </div>
         </div>
       </div>
     </div>
