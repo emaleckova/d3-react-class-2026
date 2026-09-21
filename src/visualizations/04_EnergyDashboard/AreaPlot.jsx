@@ -9,7 +9,7 @@ const MARGIN = {
   top: 20,
   right: 20,
   bottom: 50,
-  left: 50,
+  left: 80,
 };
 
 // Static area plot

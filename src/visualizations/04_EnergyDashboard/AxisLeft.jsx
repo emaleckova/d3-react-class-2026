@@ -38,7 +38,7 @@ export const AxisLeft = ({ yScale, pixelsPerTick, label }) => {
       {label && (
         <text
           x={-height / 2}
-          y={-40}
+          y={-55}
           fontSize={12}
           fontWeight="bold"
           textAnchor="middle"
