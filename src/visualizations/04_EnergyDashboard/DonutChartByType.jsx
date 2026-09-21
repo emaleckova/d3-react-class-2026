@@ -17,7 +17,7 @@ export const DonutChartByType = ({ data, width, height, fillScale, label }) => {
   const pieGenerator = d3.pie().value((d) => d.value);
   const pie = pieGenerator(data);
   // slice drawing
-  const arcGenerator = d3.arc().innerRadius(150).outerRadius(radius);
+  const arcGenerator = d3.arc().innerRadius(100).outerRadius(radius);
 
   return (
     <svg width={width} height={height} style={{ display: "inline-block" }}>
