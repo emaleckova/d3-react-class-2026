@@ -2,6 +2,7 @@ import * as d3 from "d3";
 
 import { ResponsiveAreaPlot } from "./AreaPlot";
 import { ResponsiveDonutChartByType } from "./DonutChartByType";
+import { BarChart } from "./BarChart";
 import energyData from "./energyData";
 
 const SPACING = 16;
@@ -71,6 +72,19 @@ const worldPrimaryEnergyLastYear = worldPrimaryEnergy.find(
   (world) => world.year === lastYear,
 ).primary_energy;
 
+// Top ten countries by total production in the last year with data
+const topCountries = [...energyData]
+  .filter((d) => d.country !== "World" && d.year === lastYear)
+  .sort((a, b) => b.primary_energy - a.primary_energy)
+  .slice(0, 10)
+  .map((d) => d.country);
+
+console.log(topCountries);
+
+const topCountriesData = energyData.filter(
+  (d) => topCountries.includes(d.country) && d.year === lastYear,
+);
+
 export default function EnergyDashboard() {
   return (
     <div
@@ -130,6 +144,7 @@ export default function EnergyDashboard() {
             />
           </div>
         </div>
+        {/*Donut two*/}
         <div
           style={{
             flex: 1,
@@ -149,6 +164,22 @@ export default function EnergyDashboard() {
               label={`${worldPrimaryEnergyLastYear} TWh`}
             />
           </div>
+        </div>
+      </div>
+      {/*Barch chart section*/}
+      <div
+        style={{
+          flex: 1,
+          minHeight: 0,
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <h4 style={{ margin: 0 }}>
+          {`Largest energy consumers in ${lastYear}`}
+        </h4>
+        <div style={{ flex: 1, minHeight: 0 }}>
+          <BarChart data={topCountriesData} />
         </div>
       </div>
     </div>
