@@ -79,11 +79,11 @@ const topCountries = [...energyData]
   .slice(0, 10)
   .map((d) => d.country);
 
-console.log(topCountries);
-
 const topCountriesData = energyData.filter(
   (d) => topCountries.includes(d.country) && d.year === lastYear,
 );
+console.log("topCountriesData: ");
+console.table(topCountriesData);
 
 export default function EnergyDashboard() {
   return (
@@ -102,7 +102,7 @@ export default function EnergyDashboard() {
       <div
         style={{
           flex: 1,
-          minHeight: 0,
+          minHeight: 250,
           display: "flex",
           flexDirection: "column",
         }}
@@ -149,7 +149,7 @@ export default function EnergyDashboard() {
           style={{
             flex: 1,
             minWidth: 0,
-            minHeight: 0,
+            minHeight: 250,
             display: "flex",
             flexDirection: "column",
           }}
@@ -170,16 +170,16 @@ export default function EnergyDashboard() {
       <div
         style={{
           flex: 1,
-          minHeight: 0,
+          minHeight: 250,
           display: "flex",
           flexDirection: "column",
         }}
       >
         <h4 style={{ margin: 0 }}>
-          {`Largest energy consumers in ${lastYear}`}
+          {`Biggest enery consumers in ${lastYear}`}
         </h4>
         <div style={{ flex: 1, minHeight: 0 }}>
-          <BarChart data={topCountriesData} />
+          <BarChart data={topCountriesData} width={800} height={500} />
         </div>
       </div>
     </div>
