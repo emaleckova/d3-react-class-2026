@@ -2,7 +2,7 @@ import * as d3 from "d3";
 
 import { ResponsiveAreaPlot } from "./AreaPlot";
 import { ResponsiveDonutChartByType } from "./DonutChartByType";
-import { BarChart } from "./BarChart";
+import { ResponsiveBarChart } from "./BarChart";
 import energyData from "./energyData";
 
 const SPACING = 16;
@@ -90,7 +90,7 @@ export default function EnergyDashboard() {
     <div
       style={{
         width: "100%",
-        height: "100vh",
+        minHeight: "100dvh",
         display: "flex",
         flexDirection: "column",
         gap: SPACING,
@@ -101,16 +101,15 @@ export default function EnergyDashboard() {
       {/*Area section*/}
       <div
         style={{
-          flex: 1,
-          minHeight: 250,
+          width: "100%",
           display: "flex",
           flexDirection: "column",
         }}
       >
-        <h4 style={{ margin: 0 }}>
+        <h4 style={{ marginBottom: 10 }}>
           {`Global energy consumption: ${firstYear} - ${lastYear}`}
         </h4>
-        <div style={{ flex: 1, minHeight: 0 }}>
+        <div style={{ width: "100%", aspectRatio: "2/1" }}>
           <ResponsiveAreaPlot data={worldPrimaryEnergy} />
         </div>
       </div>
@@ -118,68 +117,64 @@ export default function EnergyDashboard() {
       <div
         style={{
           display: "flex",
-          flex: 1,
+          flexDirection: "row",
           gap: SPACING,
           minHeight: 0,
         }}
       >
-        {/*Donut one*/}
+        {/*Donut one + title*/}
         <div
           style={{
-            flex: 1,
             minWidth: 0,
-            minHeight: 0,
+            minHeight: 500,
+            aspectRatio: "1",
             display: "flex",
             flexDirection: "column",
           }}
         >
           <h4
-            style={{ margin: 0 }}
+            style={{ marginBottom: 10 }}
           >{`Global energy composition in ${firstYear}`}</h4>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <ResponsiveDonutChartByType
-              data={worldEnergyFirstYear}
-              fillScale={TypeColorScale}
-              label={`${worldPrimaryEnergyFirstYear} TWh`}
-            />
-          </div>
+          <ResponsiveDonutChartByType
+            data={worldEnergyFirstYear}
+            fillScale={TypeColorScale}
+            label={`${worldPrimaryEnergyFirstYear} TWh`}
+          />
         </div>
-        {/*Donut two*/}
+        {/*Donut two + title*/}
         <div
           style={{
-            flex: 1,
             minWidth: 0,
-            minHeight: 250,
+            minHeight: 500,
+            aspectRatio: "1",
             display: "flex",
             flexDirection: "column",
           }}
         >
           <h4
-            style={{ margin: 0 }}
+            style={{ marginBottom: 10 }}
           >{`Global energy composition in ${lastYear}`}</h4>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <ResponsiveDonutChartByType
-              data={worldEnergyLastYear}
-              fillScale={TypeColorScale}
-              label={`${worldPrimaryEnergyLastYear} TWh`}
-            />
-          </div>
+          <ResponsiveDonutChartByType
+            data={worldEnergyLastYear}
+            fillScale={TypeColorScale}
+            label={`${worldPrimaryEnergyLastYear} TWh`}
+          />
         </div>
       </div>
       {/*Barch chart section*/}
       <div
         style={{
           flex: 1,
-          minHeight: 250,
+          minHeight: "50dvh",
           display: "flex",
           flexDirection: "column",
         }}
       >
-        <h4 style={{ margin: 0 }}>
+        <h4 style={{ marginBottom: 10 }}>
           {`Biggest enery consumers in ${lastYear}`}
         </h4>
         <div style={{ flex: 1, minHeight: 0 }}>
-          <BarChart data={topCountriesData} width={800} height={500} />
+          <ResponsiveBarChart data={topCountriesData} />
         </div>
       </div>
     </div>

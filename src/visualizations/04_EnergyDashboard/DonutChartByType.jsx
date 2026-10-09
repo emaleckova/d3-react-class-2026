@@ -50,7 +50,7 @@ export const ResponsiveDonutChartByType = (props) => {
   const chartSize = useDimensions(chartRef);
 
   return (
-    <div ref={chartRef} style={{ widht: "100%", height: "100%" }}>
+    <div ref={chartRef} style={{ width: "100%", height: "100%" }}>
       <DonutChartByType
         height={chartSize.height}
         width={chartSize.width}

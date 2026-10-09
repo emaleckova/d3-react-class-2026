@@ -67,3 +67,13 @@ export const BarChart = ({ data, width, height }) => {
 };
 
 // Responsive version
+export const ResponsiveBarChart = (props) => {
+  const chartRef = useRef(null);
+  const chartSize = useDimensions(chartRef);
+
+  return (
+    <div ref={chartRef} style={{ width: "100%", height: "100%" }}>
+      <BarChart height={chartSize.height} width={chartSize.width} {...props} />
+    </div>
+  );
+};
