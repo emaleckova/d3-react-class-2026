@@ -16,8 +16,10 @@ const MARGIN = {
 export const BarChart = ({ data, width, height }) => {
   const boundsHeight = height - MARGIN.top - MARGIN.bottom;
   const boundsWidth = width - MARGIN.left - MARGIN.right;
-
-  const maxEnergy = d3.min(data, (d) => d.primary_energy);
+  console.log("BarChart - input data:");
+  console.table(data);
+  const maxEnergy = d3.max(data, (d) => d.primary_energy);
+  console.log("maxEnergy = " + maxEnergy);
 
   const countries = [...data]
     .sort((a, b) => b.primary_energy - a.primary_energy)
@@ -49,7 +51,7 @@ export const BarChart = ({ data, width, height }) => {
               fill="#076fa2"
             />
             <text
-              x={xScale(-60)}
+              x={xScale(-150)}
               y={yScale(d.country) + yScale.bandwidth() / 2}
               fill="black"
               fontSize={12}
