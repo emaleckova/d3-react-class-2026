@@ -5,7 +5,7 @@ import { ResponsiveDonutChartByType } from "./DonutChartByType";
 import { ResponsiveBarChart } from "./BarChart";
 import energyData from "./energyData";
 
-const SPACING = 16;
+const SPACING = 40;
 
 // Colours by energy type
 const energyTypes = Object.keys(energyData[0]).filter(
@@ -117,48 +117,49 @@ export default function EnergyDashboard() {
       <div
         style={{
           display: "flex",
-          flexDirection: "row",
+          width: "100%",
           gap: SPACING,
-          minHeight: 0,
         }}
       >
         {/*Donut one + title*/}
         <div
           style={{
             minWidth: 0,
-            minHeight: 500,
-            aspectRatio: "1",
             display: "flex",
+            flex: 1,
             flexDirection: "column",
           }}
         >
           <h4
             style={{ marginBottom: 10 }}
           >{`Global energy composition in ${firstYear}`}</h4>
+          <div style={{ width: "100%", aspectRatio: "1 / 1"}}>
           <ResponsiveDonutChartByType
             data={worldEnergyFirstYear}
             fillScale={TypeColorScale}
             label={`${worldPrimaryEnergyFirstYear} TWh`}
           />
+          </div>
         </div>
         {/*Donut two + title*/}
         <div
           style={{
             minWidth: 0,
-            minHeight: 500,
-            aspectRatio: "1",
             display: "flex",
+            flex: 1,
             flexDirection: "column",
           }}
         >
           <h4
             style={{ marginBottom: 10 }}
           >{`Global energy composition in ${lastYear}`}</h4>
+          <div style={{ width: "100%", aspectRatio: "1 / 1" }}>
           <ResponsiveDonutChartByType
             data={worldEnergyLastYear}
             fillScale={TypeColorScale}
             label={`${worldPrimaryEnergyLastYear} TWh`}
           />
+          </div>
         </div>
       </div>
       {/*Barch chart section*/}
