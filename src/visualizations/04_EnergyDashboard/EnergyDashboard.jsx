@@ -97,7 +97,7 @@ export default function EnergyDashboard() {
       }}
     >
       {/*Above: Container for all plots*/}
-      <h3>Energy Dashboard</h3>
+      <h3 style={{ marginBottom: 40 }}>Energy Dashboard</h3>
       {/*Area section*/}
       <div
         style={{
@@ -166,15 +166,14 @@ export default function EnergyDashboard() {
       <div
         style={{
           flex: 1,
-          minHeight: "50dvh",
           display: "flex",
           flexDirection: "column",
         }}
       >
         <h4 style={{ marginBottom: 10 }}>
-          {`Biggest enery consumers in ${lastYear}`}
+          {`Biggest energy consumers in ${lastYear}`}
         </h4>
-        <div style={{ flex: 1, minHeight: 0 }}>
+        <div style={{width: "100%" , aspectRatio: "2/1", marginBottom: 40 }}>
           <ResponsiveBarChart data={topCountriesData} />
         </div>
       </div>

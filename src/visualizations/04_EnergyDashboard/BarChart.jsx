@@ -35,7 +35,7 @@ export const BarChart = ({ data, width, height }) => {
     .scaleBand()
     .domain(countries)
     .range([0, boundsHeight])
-    .padding(0.05);
+    .padding(0.15);
 
   return (
     <svg width={width} height={height}>
@@ -48,10 +48,12 @@ export const BarChart = ({ data, width, height }) => {
               y={yScale(d.country)}
               height={yScale.bandwidth()}
               width={xScale(d.primary_energy)}
-              fill="#076fa2"
+              fill="#16A08C"
+              fillOpacity={0.5}
+              stroke="#16A08C"
             />
             <text
-              x={xScale(-150)}
+              x={xScale(-200)}
               y={yScale(d.country) + yScale.bandwidth() / 2}
               fill="black"
               fontSize={12}
