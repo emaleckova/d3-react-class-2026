@@ -3,6 +3,7 @@ import {useState} from "react";
 
 import { ResponsiveAreaPlot } from "./AreaPlot";
 import { ResponsiveDonutChartByType } from "./DonutChartByType";
+import { EnergyLegend } from "./EnergyLegend";
 import { ResponsiveBarChart } from "./BarChart";
 import energyData from "./energyData";
 
@@ -117,27 +118,36 @@ export default function EnergyDashboard() {
           <ResponsiveAreaPlot data={worldPrimaryEnergy} />
         </div>
       </div>
-      {/*Common container for both donuts & their titles*/}
+      {/*Common container for both donuts & their titles & a shared legend*/}
       <div
         style={{
           display: "flex",
+          flexDirection: "column",
           width: "100%",
-          gap: SPACING,
+          gap: 12,
         }}
       >
+        {/* Row 1: both donut charts */}
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            gap: SPACING,
+          }}
+        >
         {/*Donut one + title*/}
         <div
           style={{
             minWidth: 0,
             display: "flex",
-            flex: 1,
             flexDirection: "column",
+            flex: "1 1 0"
           }}
         >
           <h4
             style={{ marginBottom: 10 }}
           >{`Global energy composition in ${firstYear}`}</h4>
-          <div style={{ width: "100%", aspectRatio: "1 / 1"}}>
+          <div style={{ width: "100%", aspectRatio: "1 / 1", position:"relative"}}>
           <ResponsiveDonutChartByType
             data={worldEnergyFirstYear}
             fillScale={TypeColorScale}
@@ -151,15 +161,16 @@ export default function EnergyDashboard() {
         <div
           style={{
             minWidth: 0,
+            flex: "1 1 0",
             display: "flex",
-            flex: 1,
             flexDirection: "column",
+            flex: "1 1 0"
           }}
         >
           <h4
             style={{ marginBottom: 10 }}
           >{`Global energy composition in ${lastYear}`}</h4>
-          <div style={{ width: "100%", aspectRatio: "1 / 1" }}>
+          <div style={{ width: "100%", aspectRatio: "1 / 1", position: "relative" }}>
           <ResponsiveDonutChartByType
             data={worldEnergyLastYear}
             fillScale={TypeColorScale}
@@ -168,6 +179,26 @@ export default function EnergyDashboard() {
             setHighlightedType={setHighlightedType}
           />
           </div>
+        </div>
+      </div>
+        
+        {/* Row 2: shared legend */}
+        <div
+          style={{
+            minWidth: 0,
+            flex: "1 1 0",
+            display: "flex",
+            flexDirection: "column",
+            backgroundColor: "white",
+            borderRadius: 5
+          }}
+        >
+        <EnergyLegend
+            data={worldEnergyFirstYear}
+            fillScale={TypeColorScale}
+            highlightedType={highlightedType}
+            setHighlightedType={setHighlightedType}
+          />
         </div>
       </div>
       {/*Barch chart section*/}
