@@ -1,4 +1,5 @@
 import * as d3 from "d3";
+import {useState} from "react";
 
 import { ResponsiveAreaPlot } from "./AreaPlot";
 import { ResponsiveDonutChartByType } from "./DonutChartByType";
@@ -86,6 +87,9 @@ console.log("topCountriesData: ");
 console.table(topCountriesData);
 
 export default function EnergyDashboard() {
+  // state for energy type highlighting
+  const [highlightedType, setHighlightedType] = useState(null);
+
   return (
     <div
       style={{
@@ -138,6 +142,8 @@ export default function EnergyDashboard() {
             data={worldEnergyFirstYear}
             fillScale={TypeColorScale}
             label={`${worldPrimaryEnergyFirstYear} TWh`}
+            highlightedType={highlightedType}
+            setHighlightedType={setHighlightedType}
           />
           </div>
         </div>
@@ -158,6 +164,8 @@ export default function EnergyDashboard() {
             data={worldEnergyLastYear}
             fillScale={TypeColorScale}
             label={`${worldPrimaryEnergyLastYear} TWh`}
+            highlightedType={highlightedType}
+            setHighlightedType={setHighlightedType}
           />
           </div>
         </div>
