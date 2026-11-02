@@ -2,15 +2,14 @@ import * as d3 from "d3";
 import { useRef } from "react";
 
 import { useDimensions } from "./useDimensions";
-import { AxisLeft } from "./AxisLeft";
-import { AxisBottomYear } from "./AxisBottomYear";
+import { AxisBottomEnergy } from "./AxisBottomEnergy";
 
 import "./barChartStyles.css";
 
 const MARGIN = {
   top: 40,
   right: 40,
-  bottom: 40,
+  bottom: 50,
   left: 100,
 };
 
@@ -83,6 +82,11 @@ export const BarChart = ({ data, width, height }) => {
               </text>
             </g>)
         })}
+
+        {/*x-axis*/}
+        <g transform={`translate(0,${boundsHeight})`}>
+        <AxisBottomEnergy xScale={xScale} pixelsPerTick={100} label="Energy [Twh]" labelXpos={boundsWidth / 2} />
+        </g>
       </g>
     </svg>
   );
